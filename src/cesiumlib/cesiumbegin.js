@@ -43,9 +43,9 @@ class CesiumBegin {
         globe.baseColor = Cesium.Color.DARKSLATEGRAY;
 
 
-        // viewer.infoBox.frame.removeAttribute('sandbox');
-        // viewer.infoBox.frame.src = 'about:blank';
-        // viewer.cesiumWidget.creditContainer.style.display = 'none';
+        viewer.infoBox.frame.removeAttribute('sandbox');
+        viewer.infoBox.frame.src = 'about:blank';
+        viewer.cesiumWidget.creditContainer.style.display = 'none';
 
         // viewer.extend(Cesium.viewerDragDropMixin);
         // viewer.extend(Cesium.viewerCesiumInspectorMixin);

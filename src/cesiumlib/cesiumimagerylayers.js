@@ -7,13 +7,16 @@ class CesiumImageryLayers {
         // Cesium.ArcGisBaseMapType.OCEANS = 2
         // Cesium.ArcGisBaseMapType.HILLSHADE = 3
 
-        const provider = Cesium.ArcGisMapServerImageryProvider.fromBasemapType(mapType);
+        const options = {
+            "enablePickFeatures": false,
+        };
+        const provider = Cesium.ArcGisMapServerImageryProvider.fromBasemapType(mapType, options);
         const layer = Cesium.ImageryLayer.fromProviderAsync(provider);
         viewer.imageryLayers.add(layer);
         return viewer.imageryLayers.length;
     }
 
-    static addTiandituLayers(viewer, layers = 'cta') {
+    static addTiandituLayers(viewer, layers = 'img') {
         const s = 'img,ibo,cva,vec,ter,cta,cia';
         const token = '8921e4c49ea5a72df8bc5298f40a0616';
         const lyrs = layers.trim().split(',');
@@ -30,8 +33,7 @@ class CesiumImageryLayers {
                     "subdomains": ['t0', 't1', 't2', 't3', 't4', 't5', 't6', 't7',]
                 };
                 const provider = new Cesium.WebMapTileServiceImageryProvider(options);
-                const layer = Cesium.ImageryLayer.fromProviderAsync(provider);
-                viewer.imageryLayers.add(layer);
+                viewer.imageryLayers.addImageryProvider(provider);
             } else {
                 console.log('TDT', 'invalid layer name');
             }
@@ -42,12 +44,11 @@ class CesiumImageryLayers {
     static addGridLayer(viewer) {
         const options = {};
         const provider = new Cesium.GridImageryProvider(options);
-        const layer = Cesium.ImageryLayer.fromProviderAsync(provider);
-        viewer.imageryLayers.add(layer);
+        viewer.imageryLayers.addImageryProvider(provider);
         return viewer.imageryLayers.length;
     }
 
-    static addSingletileLayer(viewer, url = './libs/cesium/Assets/Textures/moonSmall.jpg') {
+    static addSingletileLayer(viewer, url = './assets/cesium/Assets/Textures/moonSmall.jpg') {
         const provider = Cesium.SingleTileImageryProvider.fromUrl(url);
         const layer = Cesium.ImageryLayer.fromProviderAsync(provider);
         viewer.imageryLayers.add(layer);
